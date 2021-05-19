@@ -22,11 +22,6 @@ void PlayLevel(int passed_levels)
         {
             break;
         }
-
-        for(int i = 0; i < CheckEnemies(world); i++)
-        {
-            printf("Enemy [%d] is_moved = %d move cooldown = %d\n", i, world->enemies[i]->moved, world->enemies[i]->move_cooldown);
-        }
     }
     RestartSequence(world);
 }
