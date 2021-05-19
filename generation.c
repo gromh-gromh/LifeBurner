@@ -35,7 +35,7 @@ struct Map *GenerateLevel(int tries)
     return level;
 }
 
-struct Player *GeneratePlayer()
+struct Player *GeneratePlayer(int passed_levels)
 {
     struct Player *player = malloc(sizeof(struct Player));
 
@@ -44,7 +44,7 @@ struct Player *GeneratePlayer()
 
     player->health = 3;
 
-    player->passed_levels = 0;
+    player->passed_levels = passed_levels;
 
     return player;
 }
@@ -67,11 +67,11 @@ struct Enemy **GenerateEnemies(int n)
     return enemies;
 }
 
-struct World *CreateWorld()
+struct World *CreateWorld(int passed_levels)
 {
     struct World *world = malloc(sizeof(struct World));
 
-    world->player = GeneratePlayer();
+    world->player = GeneratePlayer(passed_levels);
     world->level = GenerateLevel(world->player->passed_levels);
     world->enemies = GenerateEnemies(world->level->enemies);
 

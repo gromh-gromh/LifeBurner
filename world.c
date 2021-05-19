@@ -1,6 +1,7 @@
 #include <generation.h>
 #include <world.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 void PlayerMovement(struct World *world, char key)
@@ -58,5 +59,30 @@ void DecreaseHealth(struct World *world)
     if(world->time % 15 == 0)
     {
         world->player->health--;
+        system("cls");
+    }
+}
+
+int CheckEnemies(struct World *world)
+{
+    int enemy_counter = 0;
+    for(int i = 0; i < world->level->enemies; i++)
+    {
+        if(world->enemies[i]->is_alive == true)
+        {
+            enemy_counter++;
+        }
+    }
+    return enemy_counter;
+}
+
+void ChangePassedLevels(struct Player *player, int enemies)
+{
+    if(enemies == 0)
+    {
+        player->passed_levels++;
+    } else
+    {
+        player->passed_levels = 0;
     }
 }

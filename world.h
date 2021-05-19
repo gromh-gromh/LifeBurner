@@ -15,5 +15,9 @@ void PlayerMovement(struct World *, char);
 
 void DecreaseHealth(struct World *);
 
-enum Collision CollisionCheck(struct World*);
+int CheckEnemies(struct World *);
+
+void ChangePassedLevels(struct Player *, int);
+
+enum Collision CollisionCheck(struct World *);
 

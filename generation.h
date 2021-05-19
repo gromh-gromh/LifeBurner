@@ -48,13 +48,13 @@ struct World
 struct Map *GenerateLevel(int);
 
 //Generates player character
-struct Player *GeneratePlayer();
+struct Player *GeneratePlayer(int);
 
 //Generates enemies
 struct Enemy **GenerateEnemies(int);
 
 //Combining all generated structures in one
-struct World *CreateWorld();
+struct World *CreateWorld(int);
 
 //Frees allocated for world memory
 void FreeWorld(struct World *);

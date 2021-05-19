@@ -4,7 +4,7 @@
 
 int main(void)
 {
-    PlayLevel();
+    PlayLevel(0);
 
     scanf("%s");
     return 0;

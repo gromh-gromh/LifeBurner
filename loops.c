@@ -6,10 +6,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void PlayLevel()
+void PlayLevel(int passed_levels)
 {
     struct World *world;
-    world = CreateWorld();
+    world = CreateWorld(passed_levels);
 
     while(world->player->health > 0)
     {
@@ -17,9 +17,12 @@ void PlayLevel()
         DrawFrame(world);
         DrawGUI(world);
         WaitForInput(world);
+        if(CheckEnemies(world) == 0)
+        {
+            break;
+        }
     }
-
-    system("cls");
+    RestartSequence(world);
 }
 
 void WaitForInput(struct World *world)
@@ -28,4 +31,11 @@ void WaitForInput(struct World *world)
         {
             PlayerMovement(world, getch());
         }
+}
+
+void RestartSequence(struct World *world)
+{
+    system("cls");
+    ChangePassedLevels(world->player, CheckEnemies(world));
+    PlayLevel(world->player->passed_levels);
 }
