@@ -93,3 +93,18 @@ struct World *CreateWorld(int passed_levels)
     return world;
 }
 
+void FreeWorld(struct World *world)
+{
+    free(world->level->level);
+    free(world->level);
+
+    free(world->player);
+
+    for(int i = 0; i < world->level->enemies; i++)
+    {  
+        free(world->enemies[i]);
+    }
+    free(world->enemies);
+
+    free(world);
+}

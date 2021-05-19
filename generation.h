@@ -5,7 +5,7 @@
 #define WALL 178
 #define EMPTY 32
 #define PLAYER 254
-#define ENEMY 216      
+#define ENEMY 253     
 
 enum bool
 {

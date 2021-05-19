@@ -109,7 +109,7 @@ void EnemiesMovement(struct World *world, enum Axis axis, int n)
     {
         //Move enemy according on player position
         case x:
-            if(rand() == 0)
+            if(rand() % 1== 0)
             {
                 world->enemies[n]->position_y--;
             } else
@@ -118,7 +118,7 @@ void EnemiesMovement(struct World *world, enum Axis axis, int n)
             }
             break;
         case y:
-            if(rand() == 0)
+            if(rand() % 1 == 0)
             {
                 world->enemies[n]->position_x--;
             } else 

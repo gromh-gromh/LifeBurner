@@ -36,7 +36,13 @@ void WaitForInput(struct World *world)
 
 void RestartSequence(struct World *world)
 {
+    //Temprorary variable for passed levels
+    int temp;
     system("cls");
+
     ChangePassedLevels(world->player, CheckEnemies(world));
-    PlayLevel(world->player->passed_levels);
+    temp = world->player->passed_levels;
+    
+    FreeWorld(world);
+    PlayLevel(temp);
 }
