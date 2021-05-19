@@ -72,6 +72,9 @@ struct Enemy **GenerateEnemies(int n)
         enemies[i]->position_y = (rand() % (SIZE_Y - 2)) + 1;
 
         enemies[i]->is_alive = true;
+        
+        enemies[i]->moved = false;
+        enemies[i]->move_cooldown = 0;
     }
     return enemies;
 }

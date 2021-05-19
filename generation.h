@@ -34,6 +34,8 @@ struct Enemy
     int position_x;
     int position_y;
     enum bool is_alive;
+    enum bool moved;
+    int move_cooldown;
 };
 
 struct World
