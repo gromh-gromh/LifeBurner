@@ -5,6 +5,7 @@
 
 struct Map *GenerateLevel(int tries)
 {
+    //Allocating memory for game level
     struct Map *level = malloc(sizeof(struct Map));
 
     level->size_x = SIZE_X;
@@ -16,6 +17,7 @@ struct Map *GenerateLevel(int tries)
         level->level[i] = calloc(level->size_x, sizeof(char));
     }
 
+    //Filling 2D array that representates game map
     for(int i = 0; i < level->size_y; i++)
     {
         for(int j = 0; j < level->size_x; j++)
@@ -30,6 +32,7 @@ struct Map *GenerateLevel(int tries)
         }
     }
 
+    //Calculating number of enemies
     level->enemies = 10 - tries;
 
     return level;
@@ -37,13 +40,17 @@ struct Map *GenerateLevel(int tries)
 
 struct Player *GeneratePlayer(int passed_levels)
 {
+    //Allocating memory for player
     struct Player *player = malloc(sizeof(struct Player));
 
+    //Initialazing player position
     player->position_x = SIZE_X / 2;
     player->position_y = SIZE_Y / 2;
 
+    //Initialazing player health
     player->health = 3;
 
+    //Initialazing passed levels varable
     player->passed_levels = passed_levels;
 
     return player;
@@ -53,8 +60,10 @@ struct Enemy **GenerateEnemies(int n)
 {
     srand(time(NULL));
 
+    //Allocating memory for array, wich contains pointers to the enemies
     struct Enemy **enemies = calloc(n, sizeof(struct Enemy *));
 
+    //Allocating memory for enemies and generating their coordinates
     for(int i = 0; i < n; i++)
     {
         enemies[i] = malloc(sizeof(struct Enemy));
@@ -75,6 +84,7 @@ struct World *CreateWorld(int passed_levels)
     world->level = GenerateLevel(world->player->passed_levels);
     world->enemies = GenerateEnemies(world->level->enemies);
 
+    //Setting "timer" to zero
     world->time = 0;
 
     return world;

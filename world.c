@@ -6,9 +6,11 @@
 
 void PlayerMovement(struct World *world, char key)
 {
+    //Saving player position before movement
     int prev_x = world->player->position_x;
     int prev_y = world->player->position_y;
 
+    //Move player according on input
     switch(key)
     {
         case UP:
@@ -25,13 +27,16 @@ void PlayerMovement(struct World *world, char key)
             break;
     }
 
+    //Check for collision
     switch(CollisionCheck(world))
     {
         case wall:
+            //Return player to the previous position
             world->player->position_x = prev_x;
             world->player->position_y = prev_y;
             break;
         case enemy:
+            //Increase player health
             world->player->health++;
     }
 }
@@ -47,6 +52,7 @@ enum Collision CollisionCheck(struct World* world)
     {
         if(world->player->position_x == world->enemies[i]->position_x && world->player->position_y == world->enemies[i]->position_y && world->enemies[i]->is_alive)
         {
+            //"Killing" enemy
             world->enemies[i]->is_alive = false;
             return enemy;
         }
@@ -56,9 +62,10 @@ enum Collision CollisionCheck(struct World* world)
 void DecreaseHealth(struct World *world)
 {
     world->time ++;
-    if(world->time % 15 == 0)
+    if(world->time % HEALTH_DECREASE_RATE == 0)
     {
         world->player->health--;
+        //Temprorary call to avoid graphic bug
         system("cls");
     }
 }
@@ -74,6 +81,11 @@ int CheckEnemies(struct World *world)
         }
     }
     return enemy_counter;
+}
+
+void EnemiesAI(struct World *world)
+{
+    
 }
 
 void ChangePassedLevels(struct Player *player, int enemies)
