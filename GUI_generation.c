@@ -4,7 +4,7 @@
 
 struct Menu *GenerateMainMenu()
 {
-    //Allocating memory for menu
+    //Menu memory allocation
     struct Menu *main_menu = malloc(sizeof(struct Menu));
 
     //Allocating memory for buttons
