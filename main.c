@@ -1,10 +1,10 @@
-#include <generation.h>
+#include <world_generation.h>
 #include <stdio.h>
 #include <loops.h>
 
 int main(void)
 {
-    PlayLevel(0);
+    MainMenu();
 
     scanf("%s");
     return 0;

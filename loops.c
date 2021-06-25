@@ -1,10 +1,24 @@
-#include <generation.h>
+#include <GUI_generation.h>
+#include <world_generation.h>
 #include <loops.h>
+#include <GUI.h>
 #include <world.h>
 #include <graphics.h>
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+void MainMenu()
+{
+    struct Menu *main_menu = GenerateMainMenu();
+    DrawMenu(main_menu);
+
+    while(1)
+    {
+        MenuInteraction(getch(), main_menu);
+        DrawMenu(main_menu);
+    }
+}
 
 void PlayLevel(int passed_levels)
 {
@@ -15,13 +29,13 @@ void PlayLevel(int passed_levels)
     {
         DecreaseHealth(world);
         DrawFrame(world);
-        DrawGUI(world);
+        DrawHUD(world);
         WaitForInput(world);
         EnemiesAI(world);
         if(CheckEnemies(world) == 0)
         {
             break;
-        }
+        } 
     }
     RestartSequence(world);
 }

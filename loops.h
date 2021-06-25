@@ -1,5 +1,8 @@
 #pragma once
 
+//Main menu
+void MainMenu();
+
 //Main gameplay loop
 void PlayLevel(int);
 

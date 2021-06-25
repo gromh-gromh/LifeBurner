@@ -1,4 +1,4 @@
-#include <generation.h>
+#include <world_generation.h>
 #include <world.h>
 #include <stdio.h>
 #include <stdlib.h>

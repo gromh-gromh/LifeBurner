@@ -1,4 +1,5 @@
-#include <generation.h>
+#include <GUI_generation.h>
+#include <world_generation.h>
 #include <graphics.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,6 +14,26 @@ void ClearScreen()
     cursorPosition.Y = 0;	
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursorPosition);
 }
+
+void DrawMenu(struct Menu *menu)
+{
+    system("cls");
+
+    struct Button *button = menu->tail;
+
+    do
+    {
+        button = button->next;
+
+        printf("%s ", button->name);
+        if(button->isSelected == true)
+        {
+            printf("[]");
+        }
+        printf("\n");
+
+    } while(button != menu->tail);
+};
 
 void DrawFrame(struct World *world)
 {
@@ -56,7 +77,7 @@ void DrawFrame(struct World *world)
     free(level_picture);
 }
 
-void DrawGUI(struct World *world)
+void DrawHUD(struct World *world)
 {
     DrawHealthBar(world->player);
     DrawPassedLevels(world->player);
