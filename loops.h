@@ -9,6 +9,9 @@ void HelpMenu();
 //Credits menu
 void CreditsMenu();
 
+//End screen menu
+void EndScreenMenu();
+
 //Main gameplay loop
 void PlayLevel(int);
 

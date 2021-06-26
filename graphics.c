@@ -94,5 +94,5 @@ void DrawHealthBar(struct Player *player)
 
 void DrawPassedLevels(struct Player *player)
 {
-    printf("\nPassed levels: %d", player->passed_levels);
+    printf("\nLevel %d\n", player->passed_levels + 1);
 }

@@ -41,6 +41,22 @@ void CreditsMenu()
     }
 }
 
+void PauseMenu()
+{
+    struct Menu *pause_menu = GeneratePauseMenu();
+
+    while(pause_menu->isOpened == true)
+    {
+        DrawMenu(pause_menu);
+        MenuInteraction(getch(), pause_menu);
+    }
+}
+
+void EndScreenMenu()
+{
+    MainMenu();
+}
+
 void PlayLevel(int passed_levels)
 {
     struct World *world;
@@ -58,18 +74,8 @@ void PlayLevel(int passed_levels)
             break;
         } 
     }
+
     RestartSequence(world);
-}
-
-void PauseMenu()
-{
-    struct Menu *pause_menu = GeneratePauseMenu();
-
-    while(pause_menu->isOpened == true)
-    {
-        DrawMenu(pause_menu);
-        MenuInteraction(getch(), pause_menu);
-    }
 }
 
 void RestartSequence(struct World *world)
@@ -82,7 +88,14 @@ void RestartSequence(struct World *world)
     temp = world->player->passed_levels;
     
     FreeWorld(world);
-    PlayLevel(temp);
+
+    if(temp < 10)
+    {
+        PlayLevel(temp);
+    } else 
+    {
+        EndScreenMenu();
+    }
 }
 
 void ExitGame()
