@@ -4,7 +4,7 @@
 void MenuInteraction(char key, struct Menu *menu)
 {
     struct Button *selected_button = menu->head;
-     while(selected_button->isSelected != true)
+    while(selected_button->isSelected != true)
     {
         selected_button = selected_button->next;
     }
@@ -18,8 +18,13 @@ void MenuInteraction(char key, struct Menu *menu)
             ChangeSelected(selected_button, down);
             break;
         case PRESSED:
-            selected_button->action(selected_button->action_argument);
-            break;
+            menu->isOpened = false;
+            FreeMenu(menu);
+            if(selected_button->action)
+            {
+                selected_button->action(selected_button->action_argument);
+                break;
+            }
     }
 };
 

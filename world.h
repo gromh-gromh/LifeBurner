@@ -4,6 +4,7 @@
 #define DOWN 's'
 #define RIGHT 'd'
 #define LEFT 'a'
+#define ESC 27
 #define HEALTH_DECREASE_RATE 15
 
 enum Collision
@@ -18,8 +19,8 @@ enum Axis
     x
 };
 
-//Change player position according on input
-void PlayerMovement(struct World *, char);
+//Change player position or menu call according on input
+void PlayerInput(struct World *, char);
 
 //Decrease health over time
 void DecreaseHealth(struct World *);

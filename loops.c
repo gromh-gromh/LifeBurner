@@ -11,12 +11,33 @@
 void MainMenu()
 {
     struct Menu *main_menu = GenerateMainMenu();
-    DrawMenu(main_menu);
 
-    while(1)
+    while(main_menu->isOpened == true)
     {
-        MenuInteraction(getch(), main_menu);
         DrawMenu(main_menu);
+        MenuInteraction(getch(), main_menu);
+    }
+}
+
+void HelpMenu()
+{
+    struct Menu *help_menu = GenerateHelpMenu();
+
+    while(help_menu->isOpened == true)
+    {
+        DrawMenu(help_menu);
+        MenuInteraction(getch(), help_menu);
+    }
+}
+
+void CreditsMenu()
+{
+    struct Menu *credits_menu = GenerateCreditsMenu();
+
+    while(credits_menu->isOpened == true)
+    {
+        DrawMenu(credits_menu);
+        MenuInteraction(getch(), credits_menu);
     }
 }
 
@@ -30,7 +51,7 @@ void PlayLevel(int passed_levels)
         DecreaseHealth(world);
         DrawFrame(world);
         DrawHUD(world);
-        WaitForInput(world);
+        PlayerInput(world, getch());
         EnemiesAI(world);
         if(CheckEnemies(world) == 0)
         {
@@ -40,12 +61,15 @@ void PlayLevel(int passed_levels)
     RestartSequence(world);
 }
 
-void WaitForInput(struct World *world)
+void PauseMenu()
 {
-        if(kbhit)
-        {
-            PlayerMovement(world, getch());
-        }
+    struct Menu *pause_menu = GeneratePauseMenu();
+
+    while(pause_menu->isOpened == true)
+    {
+        DrawMenu(pause_menu);
+        MenuInteraction(getch(), pause_menu);
+    }
 }
 
 void RestartSequence(struct World *world)
@@ -59,4 +83,9 @@ void RestartSequence(struct World *world)
     
     FreeWorld(world);
     PlayLevel(temp);
+}
+
+void ExitGame()
+{
+    exit(0);
 }

@@ -21,6 +21,7 @@ void DrawMenu(struct Menu *menu)
 
     struct Button *button = menu->tail;
 
+    printf("%s\n", menu->name);
     do
     {
         button = button->next;

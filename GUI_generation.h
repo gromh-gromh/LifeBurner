@@ -17,6 +17,8 @@ struct Menu
 {
     struct Button *head;
     struct Button *tail;
+    char* name;
+    enum bool isOpened;
 };
 
 //Generates hard coded main menu
@@ -25,5 +27,11 @@ struct Menu *GenerateMainMenu();
 //Generates hard coded pause menu
 struct Menu *GeneratePauseMenu();
 
+//Generates hard coded help menu
+struct Menu *GenerateHelpMenu();
+
+//Generates credits menu
+struct Menu *GenerateCreditsMenu();
+
 //Frees allocated for menu memory
-void FreeMenu();
+void FreeMenu(struct Menu *);

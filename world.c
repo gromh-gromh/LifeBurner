@@ -1,11 +1,12 @@
 #include <world_generation.h>
 #include <world.h>
+#include <loops.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
 
-void PlayerMovement(struct World *world, char key)
+void PlayerInput(struct World *world, char key)
 {
     //Saving player position before movement
     int prev_x = world->player->position_x;
@@ -25,6 +26,9 @@ void PlayerMovement(struct World *world, char key)
             break;
         case LEFT:
             world->player->position_x--;
+            break;
+        case ESC:
+            PauseMenu();
             break;
     }
 
