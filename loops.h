@@ -12,6 +12,9 @@ void CreditsMenu();
 //End screen menu
 void EndScreenMenu();
 
+//Death screen menu
+void DeathScreenMenu();
+
 //Main gameplay loop
 void PlayLevel(int);
 

@@ -29,7 +29,6 @@ void PlayerInput(struct World *world, char key)
             break;
         case ESC:
             PauseMenu();
-            break;
     }
 
     //Check for collision

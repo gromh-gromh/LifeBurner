@@ -33,5 +33,11 @@ struct Menu *GenerateHelpMenu();
 //Generates credits menu
 struct Menu *GenerateCreditsMenu();
 
+//Generates end screen menu
+struct Menu *GenerateEndScreenMenu();
+
+//Generates death screen menu
+struct Menu *GenerateDeathScreenMenu();
+
 //Frees allocated for menu memory
 void FreeMenu(struct Menu *);

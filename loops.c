@@ -54,7 +54,24 @@ void PauseMenu()
 
 void EndScreenMenu()
 {
-    MainMenu();
+    struct Menu *end_screen_menu = GenerateEndScreenMenu();
+
+    while(end_screen_menu->isOpened == true)
+    {
+        DrawMenu(end_screen_menu);
+        MenuInteraction(getch(), end_screen_menu);
+    }
+}
+
+void DeathScreenMenu()
+{
+    struct Menu *death_screen_menu = GenerateDeathScreenMenu();
+
+    while(death_screen_menu->isOpened == true)
+    {
+        DrawMenu(death_screen_menu);
+        MenuInteraction(getch(), death_screen_menu);
+    }
 }
 
 void PlayLevel(int passed_levels)
@@ -64,10 +81,10 @@ void PlayLevel(int passed_levels)
 
     while(world->player->health > 0)
     {
-        DecreaseHealth(world);
         DrawFrame(world);
         DrawHUD(world);
         PlayerInput(world, getch());
+        DecreaseHealth(world);
         EnemiesAI(world);
         if(CheckEnemies(world) == 0)
         {
@@ -80,20 +97,28 @@ void PlayLevel(int passed_levels)
 
 void RestartSequence(struct World *world)
 {
+
     //Temprorary variable for passed levels
-    int temp;
-    system("cls");
+    int temp_levels;
+    int temp_health;
 
     ChangePassedLevels(world->player, CheckEnemies(world));
-    temp = world->player->passed_levels;
+    temp_levels = world->player->passed_levels;
+    temp_health = world->player->health;
     
     FreeWorld(world);
 
-    if(temp < 10)
+    if(temp_levels < 10)
     {
-        PlayLevel(temp);
+        if(temp_health > 0)
+        {
+            PlayLevel(temp_levels);
+        } else
+        {
+            DeathScreenMenu();
+        }
     } else 
-    {
+    { 
         EndScreenMenu();
     }
 }

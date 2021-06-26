@@ -151,6 +151,72 @@ struct Menu *GenerateCreditsMenu()
     return credits_menu;
 }
 
+struct Menu *GenerateEndScreenMenu()
+{
+    //Menu memory allocation
+    struct Menu *end_screen_menu = malloc(sizeof(struct Menu));
+
+    //Button memory allocation
+    struct Button *main_menu_button = malloc(sizeof(struct Button));
+    struct Button *play_again_button = malloc(sizeof(struct Button));
+
+    //Button inititalization
+    main_menu_button->prev = play_again_button;
+    main_menu_button->name = "Main menu";
+    main_menu_button->action_argument = NULL;
+    main_menu_button->action = (&MainMenu);
+    main_menu_button->isSelected = true;
+    main_menu_button->next = play_again_button;
+
+    play_again_button->prev = main_menu_button;
+    play_again_button->name = "Play again";
+    play_again_button->action_argument = (int)0;
+    play_again_button->action = (&PlayLevel);
+    play_again_button->isSelected = false;
+    play_again_button->next = main_menu_button;
+
+    //Menu initialization
+    end_screen_menu->head = main_menu_button;
+    end_screen_menu->tail = play_again_button;
+    end_screen_menu->name = "You made successfull cyber attack and still breathing. Impressive.\n";
+    end_screen_menu->isOpened = true;
+
+    return end_screen_menu;
+}
+
+struct Menu *GenerateDeathScreenMenu()
+{
+    //Menu memory allocation
+    struct Menu *death_screen_menu = malloc(sizeof(struct Menu));
+
+    //Button memory allocation
+    struct Button *main_menu_button = malloc(sizeof(struct Button));
+    struct Button *play_again_button = malloc(sizeof(struct Button));
+
+    //Button inititalization
+    main_menu_button->prev = play_again_button;
+    main_menu_button->name = "Main menu";
+    main_menu_button->action_argument = NULL;
+    main_menu_button->action = (&MainMenu);
+    main_menu_button->isSelected = true;
+    main_menu_button->next = play_again_button;
+
+    play_again_button->prev = main_menu_button;
+    play_again_button->name = "Play again";
+    play_again_button->action_argument = (int)0;
+    play_again_button->action = (&PlayLevel);
+    play_again_button->isSelected = false;
+    play_again_button->next = main_menu_button;
+
+    //Menu initialization
+    death_screen_menu->head = main_menu_button;
+    death_screen_menu->tail = play_again_button;
+    death_screen_menu->name = "Flatlined.\n";
+    death_screen_menu->isOpened = true;
+
+    return death_screen_menu;
+}
+
 void FreeMenu(struct Menu *menu)
 {
     struct Button *button = menu->tail;
