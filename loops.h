@@ -15,11 +15,11 @@ void EndScreenMenu();
 //Death screen menu
 void DeathScreenMenu();
 
-//Pause menu
-void PauseMenu();
-
 //Main gameplay loop
 void PlayLevel(int);
+
+//Pause menu
+void PauseMenu();
 
 //Restarting game according on previous progress
 void RestartSequence(struct World *);

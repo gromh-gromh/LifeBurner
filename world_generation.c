@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-struct Map *GenerateLevel(int passed_levels)
+struct Map *GenerateLevel(int tries)
 {
     //Allocating memory for game level
     struct Map *level = malloc(sizeof(struct Map));
@@ -33,7 +33,7 @@ struct Map *GenerateLevel(int passed_levels)
     }
 
     //Calculating number of enemies
-    level->enemies = MAX_ENEMIES - passed_levels;
+    level->enemies = 10 - tries;
 
     return level;
 }

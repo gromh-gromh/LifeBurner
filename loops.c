@@ -8,8 +8,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_LEVELS 10
-
 void MainMenu()
 {
     struct Menu *main_menu = GenerateMainMenu();
@@ -78,8 +76,6 @@ void DeathScreenMenu()
 
 void PlayLevel(int passed_levels)
 {
-    system("cls");
-
     struct World *world;
     world = CreateWorld(passed_levels);
 
@@ -101,6 +97,7 @@ void PlayLevel(int passed_levels)
 
 void RestartSequence(struct World *world)
 {
+
     //Temprorary variable for passed levels
     int temp_levels;
     int temp_health;
@@ -111,7 +108,7 @@ void RestartSequence(struct World *world)
     
     FreeWorld(world);
 
-    if(temp_levels < MAX_LEVELS)
+    if(temp_levels < 10)
     {
         if(temp_health > 0)
         {
