@@ -61,6 +61,8 @@ enum Collision PlayerCollisionCheck(struct World* world)
             return enemy;
         }
     }
+
+    return none;
 }
 
 void DecreaseHealth(struct World *world)
