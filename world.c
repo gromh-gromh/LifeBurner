@@ -28,9 +28,7 @@ void PlayerInput(struct World *world, char key)
             world->player->position_x--;
             break;
         case ESC:
-            world->time--;
             PauseMenu();
-            break;
     }
 
     //Check for collision
@@ -63,15 +61,12 @@ enum Collision PlayerCollisionCheck(struct World* world)
             return enemy;
         }
     }
-
-    return none;
 }
 
 void DecreaseHealth(struct World *world)
 {
     world->time ++;
-
-    if(world->time % HEALTH_DECREASE_RATE == 0 && world->time != 0)
+    if(world->time % HEALTH_DECREASE_RATE == 0)
     {
         world->player->health--;
         //Temprorary call to avoid graphic bug
