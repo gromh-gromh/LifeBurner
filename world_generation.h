@@ -46,17 +46,17 @@ struct World
     int time;
 };
 
-//Generates level
+//Generate level
 struct Map *GenerateLevel(int);
 
-//Generates player character
+//Generate player character
 struct Player *GeneratePlayer(int);
 
-//Generates enemies
+//Generate enemies
 struct Enemy **GenerateEnemies(int);
 
 //Combining all generated structures in one
 struct World *CreateWorld(int);
 
-//Frees allocated for world memory
+//Free allocated memory for world
 void FreeWorld(struct World *);

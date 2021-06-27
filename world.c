@@ -12,7 +12,7 @@ void PlayerInput(struct World *world, char key)
     int prev_x = world->player->position_x;
     int prev_y = world->player->position_y;
 
-    //Move player according on input
+    //Change player/game state according on input
     switch(key)
     {
         case UP:

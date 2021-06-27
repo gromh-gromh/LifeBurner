@@ -40,6 +40,6 @@ void EnemiesAI(struct World*);
 //Checks for player collision
 enum Collision PlayerCollisionCheck(struct World *);
 
-//Checks for enemy collision
+//Checks for enemies collision
 enum bool EnemyCollisionCheck(struct World *, int);
 

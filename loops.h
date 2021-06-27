@@ -15,7 +15,7 @@ void EndScreenMenu();
 //Death screen menu
 void DeathScreenMenu();
 
-//Main gameplay loop
+//Gameplay loop
 void PlayLevel(int);
 
 //Pause menu

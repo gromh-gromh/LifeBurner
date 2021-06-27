@@ -97,8 +97,7 @@ void PlayLevel(int passed_levels)
 
 void RestartSequence(struct World *world)
 {
-
-    //Temprorary variable for passed levels
+    //Temprorary variables
     int temp_levels;
     int temp_health;
 

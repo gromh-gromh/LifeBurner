@@ -39,14 +39,14 @@ void DrawMenu(struct Menu *menu)
 void DrawFrame(struct World *world)
 {
     ClearScreen();
-    //Allocationg array for combining all parts in one frame
+    //Allocationg array for combining all layers in one frame
     char **level_picture = calloc(world->level->size_y, sizeof(char *));
     for(int i = 0; i < world->level->size_y; i++)
     {
         level_picture[i] = calloc(world->level->size_x, sizeof(char));
     }
 
-    //Combining parts
+    //Combining layers
     for(int i = 0; i < world->level->size_y; i++)
     {
         for(int j = 0; j < world->level->size_x; j++)

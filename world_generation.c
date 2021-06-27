@@ -87,7 +87,7 @@ struct World *CreateWorld(int passed_levels)
     world->level = GenerateLevel(world->player->passed_levels);
     world->enemies = GenerateEnemies(world->level->enemies);
 
-    //Setting "timer" to zero
+    //Setting "timer" to zero (actually counter of loops)
     world->time = 0;
 
     return world;
