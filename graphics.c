@@ -26,11 +26,14 @@ void DrawMenu(struct Menu *menu)
     {
         button = button->next;
 
-        printf("%s ", button->name);
         if(button->isSelected == true)
         {
-            printf("[]");
+            printf("[%s]", button->name);
+        } else
+        {
+            printf(" %s", button->name);
         }
+
         printf("\n");
 
     } while(button != menu->tail);
