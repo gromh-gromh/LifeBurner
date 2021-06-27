@@ -10,7 +10,8 @@
 enum Collision
 {
     wall,
-    enemy
+    enemy,
+    none
 };
 
 enum Axis
