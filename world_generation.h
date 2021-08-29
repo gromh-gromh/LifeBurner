@@ -1,4 +1,5 @@
 #pragma once
+#include <time.h>
 
 #define SIZE_X 50
 #define SIZE_Y 20
@@ -43,7 +44,9 @@ struct World
     struct Map *level;
     struct Player *player;
     struct Enemy **enemies;
+    //TODO remove
     int time;
+    time_t start_time;
 };
 
 //Generate level
