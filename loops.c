@@ -4,6 +4,7 @@
 #include <GUI.h>
 #include <world.h>
 #include <graphics.h>
+#include <timer.h>
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -83,7 +84,8 @@ void PlayLevel(int passed_levels)
     {
         DrawFrame(world);
         DrawHUD(world);
-        PlayerInput(world, getch());
+        GatherInput(world);
+        PlayerMovement(world);
         DecreaseHealth(world);
         EnemiesAI(world);
         if(CheckEnemies(world) == 0)
@@ -93,6 +95,14 @@ void PlayLevel(int passed_levels)
     }
 
     RestartSequence(world);
+}
+
+void GatherInput(struct World *world)
+{
+    if(kbhit())
+    {
+        PlayerInput(world, getch());
+    }
 }
 
 void RestartSequence(struct World *world)

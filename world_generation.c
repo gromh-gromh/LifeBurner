@@ -46,8 +46,16 @@ struct Player *GeneratePlayer(int passed_levels)
     player->position_x = SIZE_X / 2;
     player->position_y = SIZE_Y / 2;
 
+    //Initialazing player movement direction
+    player->movement_direction_x = NONE;
+    player->movement_direction_y = NONE;
+
+    //Initializimg player speed
+    player->speed = 0;
+
     //Initialazing player health
     player->health = 3;
+    player->time_health_cheked = 0;
 
     //Initialazing passed levels varable
     player->passed_levels = passed_levels;
@@ -74,6 +82,7 @@ struct Enemy **GenerateEnemies(int n)
         
         enemies[i]->moved = false;
         enemies[i]->move_cooldown = 0;
+        enemies[i]->time_cooldown_cheked = 0;
     }
     return enemies;
 }
@@ -86,11 +95,7 @@ struct World *CreateWorld(int passed_levels)
     world->level = GenerateLevel(world->player->passed_levels);
     world->enemies = GenerateEnemies(world->level->enemies);
 
-    //TODO remove
-    //Setting "timer" to zero (actually counter of loops)
-    world->time = 0;
-
-    //Setting start point for actual timer
+    //Setting start point for timer
     time(&(world->start_time));
 
     return world;

@@ -5,30 +5,63 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <timer.h>
 
 void PlayerInput(struct World *world, char key)
+{
+    //Change player/game state according on input
+    switch(key)
+    {
+        case UP:
+            world->player->movement_direction_y = negative;
+            world->player->movement_direction_x = NONE;
+            world->player->speed = MAX_SPEED;
+            break;
+        case DOWN:
+            world->player->movement_direction_y = positive;
+            world->player->movement_direction_x = NONE;
+            world->player->speed = MAX_SPEED;
+            break;
+        case RIGHT:
+            world->player->movement_direction_x = positive;
+            world->player->movement_direction_y = NONE;
+            world->player->speed = MAX_SPEED;
+            break;
+        case LEFT:
+            world->player->movement_direction_x = negative;
+            world->player->movement_direction_y = NONE;
+            world->player->speed = MAX_SPEED;
+            break;
+        case ESC:
+            PauseMenu();
+    }
+}
+
+void PlayerMovement(struct World *world)
 {
     //Saving player position before movement
     int prev_x = world->player->position_x;
     int prev_y = world->player->position_y;
 
-    //Change player/game state according on input
-    switch(key)
+    //Change player position
+    switch(world->player->movement_direction_y)
     {
-        case UP:
-            world->player->position_y--;
+        case negative:
+            world->player->position_y -= (int)world->player->speed;
             break;
-        case DOWN:
-            world->player->position_y++;
+        case positive:
+            world->player->position_y += (int)world->player->speed;
             break;
-        case RIGHT:
-            world->player->position_x++;
+    }
+
+    switch(world->player->movement_direction_x)
+    {
+        case negative:
+            world->player->position_x -= (int)world->player->speed;
             break;
-        case LEFT:
-            world->player->position_x--;
+        case positive:
+            world->player->position_x += (int)world->player->speed;
             break;
-        case ESC:
-            PauseMenu();
     }
 
     //Check for collision
@@ -38,15 +71,48 @@ void PlayerInput(struct World *world, char key)
             //Return player to the previous position
             world->player->position_x = prev_x;
             world->player->position_y = prev_y;
+
+            //Reverse direction
+            switch(world->player->movement_direction_y)
+            {
+                case negative:
+                    world->player->movement_direction_y = positive;
+                    break;
+                case positive:
+                    world->player->movement_direction_y = negative;
+                    break;
+            }
+
+            switch(world->player->movement_direction_x)
+            {
+                case negative:
+                    world->player->movement_direction_x = positive;
+                    break;
+                case positive:
+                    world->player->movement_direction_x = negative;
+                    break;
+            }
+
             break;
         case enemy:
             //Increase player health
             world->player->health++;
     }
+
+    //Decrease speed
+    if(world->player->speed > 0)
+    {
+        world->player->speed -= DRAG;
+    }
 }
 
 enum Collision PlayerCollisionCheck(struct World* world)
-{
+{   
+    if((world->player->position_x < 0) || (world->player->position_x > SIZE_X) || (world->player->position_y < 0) || (world->player->position_y > SIZE_Y))
+    {
+        return wall;
+    }
+
     if(world->level->level[world->player->position_y][world->player->position_x] == (char)WALL)
     {
         return wall;
@@ -67,10 +133,11 @@ enum Collision PlayerCollisionCheck(struct World* world)
 
 void DecreaseHealth(struct World *world)
 {
-    world->time ++;
-    if(world->time % HEALTH_DECREASE_RATE == 0)
+    int time = (int)GetTime(world);
+    if((time % HEALTH_DECREASE_RATE == 0) && (time != world->player->time_health_cheked))
     {
         world->player->health--;
+        world->player->time_health_cheked = time;
         //Temprorary call to avoid graphic bug
         system("cls");
     }
@@ -154,7 +221,7 @@ void EnemiesAI(struct World *world)
                 EnemiesMovement(world, x, i);
                 //Sets cooldown on movement
                 world->enemies[i]->moved = true;
-                world->enemies[i]->move_cooldown = 3; 
+                world->enemies[i]->move_cooldown = ENEMY_MOVEMENT_COOLDOWN; 
             }
 
             if(abs(world->enemies[i]->position_y - world->player->position_y) == 1 && world->enemies[i]->position_x == world->player->position_x)
@@ -162,11 +229,15 @@ void EnemiesAI(struct World *world)
                 EnemiesMovement(world, y, i);
                 //Sets cooldown on movement
                 world->enemies[i]->moved = true;
-                world->enemies[i]->move_cooldown = 3; 
+                world->enemies[i]->move_cooldown = ENEMY_MOVEMENT_COOLDOWN; 
             }
         } else
         {
-            world->enemies[i]->move_cooldown--;
+            if(GetTime(world) != world->enemies[i]->time_cooldown_cheked)
+            {
+                world->enemies[i]->move_cooldown--;
+                world->enemies[i]->time_cooldown_cheked = GetTime(world);
+            }
 
             if(world->enemies[i]->move_cooldown == 0)
             {

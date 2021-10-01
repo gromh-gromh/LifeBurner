@@ -14,6 +14,13 @@ enum bool
     true
 };
 
+enum player_direction
+{
+    NONE,
+    positive,
+    negative
+};
+
 struct Map
 {
     int size_x;
@@ -26,8 +33,12 @@ struct Player
 {
     int position_x;
     int position_y;
+    enum player_direction movement_direction_x;
+    enum player_direction movement_direction_y;
     int passed_levels;
     int health;
+    int time_health_cheked;
+    float speed;
 };
 
 struct Enemy
@@ -37,6 +48,7 @@ struct Enemy
     enum bool is_alive;
     enum bool moved;
     int move_cooldown;
+    int time_cooldown_cheked;
 };
 
 struct World
@@ -44,8 +56,6 @@ struct World
     struct Map *level;
     struct Player *player;
     struct Enemy **enemies;
-    //TODO remove
-    int time;
     time_t start_time;
 };
 

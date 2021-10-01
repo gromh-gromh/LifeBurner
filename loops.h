@@ -18,6 +18,9 @@ void DeathScreenMenu();
 //Gameplay loop
 void PlayLevel(int);
 
+//Gather input if keyboard was hit
+void GatherInput(struct World *);
+
 //Pause menu
 void PauseMenu();
 
