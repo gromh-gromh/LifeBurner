@@ -108,7 +108,7 @@ void PlayerMovement(struct World *world)
 
 enum Collision PlayerCollisionCheck(struct World* world)
 {   
-    if((world->player->position_x < 0) || (world->player->position_x > SIZE_X) || (world->player->position_y < 0) || (world->player->position_y > SIZE_Y))
+    if((world->player->position_x < 0) || (world->player->position_x > SIZE_X - 1) || (world->player->position_y < 0) || (world->player->position_y > SIZE_Y - 1))
     {
         return wall;
     }
