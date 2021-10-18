@@ -43,19 +43,13 @@ void DrawMenu(struct Menu *menu)
 void DrawFrame(struct World *world)
 {
     ClearScreen();
-    //Allocationg array for combining all layers in one frame
-    char **level_picture = calloc(world->level->size_y, sizeof(char *));
-    for(int i = 0; i < world->level->size_y; i++)
-    {
-        level_picture[i] = calloc(world->level->size_x, sizeof(char));
-    }
 
-    //Combining layers
+    //Combining objects in one layer
     for(int i = 0; i < world->level->size_y; i++)
     {
         for(int j = 0; j < world->level->size_x; j++)
         {
-            level_picture[i][j] = world->level->level[i][j];
+            world->buffers->object_buffer[i][j] = world->level->level[i][j];
         }
     }
 
@@ -63,23 +57,21 @@ void DrawFrame(struct World *world)
     {
         if(world->enemies[i]->is_alive == true)
         {
-            level_picture[world->enemies[i]->position_y][world->enemies[i]->position_x] = ENEMY;
+            world->buffers->object_buffer[world->enemies[i]->position_y][world->enemies[i]->position_x] = ENEMY;
         }
     }
 
-    level_picture[world->player->position_y][world->player->position_x] = PLAYER;
+    world->buffers->object_buffer[world->player->position_y][world->player->position_x] = PLAYER;
 
     //Drawing world
     for(int i = 0; i < world->level->size_y; i++)
     {
         for(int j = 0; j < world->level->size_x; j++)
         {
-            printf("%c", level_picture[i][j]);
+            printf("%c", world->buffers->object_buffer[i][j]);
         }
         printf("\n");
     }
-
-    free(level_picture);
 }
 
 void DrawHUD(struct World *world)

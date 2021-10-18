@@ -51,12 +51,19 @@ struct Enemy
     int time_cooldown_cheked;
 };
 
+struct Buffers
+{
+    char **object_buffer;
+    char **graphic_buffer;
+};
+
 struct World
 {
     struct Map *level;
     struct Player *player;
     struct Enemy **enemies;
     time_t start_time;
+    struct Buffers *buffers;
 };
 
 //Generate level
@@ -67,6 +74,9 @@ struct Player *GeneratePlayer(int);
 
 //Generate enemies
 struct Enemy **GenerateEnemies(int);
+
+//Generate buffers
+struct Buffers *GenerateBuffers();
 
 //Combining all generated structures in one
 struct World *CreateWorld(int);

@@ -87,6 +87,20 @@ struct Enemy **GenerateEnemies(int n)
     return enemies;
 }
 
+struct Buffers *GenerateBuffers()
+{
+    struct Buffers *buffers = malloc(sizeof(struct Buffers));
+
+    //Allocationg array for combining all objects
+    buffers->object_buffer = calloc(SIZE_Y, sizeof(char *));
+    for(int i = 0; i < SIZE_Y; i++)
+    {
+        buffers->object_buffer[i] = calloc(SIZE_X, sizeof(char));
+    }
+
+    return buffers;
+}
+
 struct World *CreateWorld(int passed_levels)
 {
     struct World *world = malloc(sizeof(struct World));
@@ -94,6 +108,7 @@ struct World *CreateWorld(int passed_levels)
     world->player = GeneratePlayer(passed_levels);
     world->level = GenerateLevel(world->player->passed_levels);
     world->enemies = GenerateEnemies(world->level->enemies);
+    world->buffers = GenerateBuffers();
 
     //Setting start point for timer
     time(&(world->start_time));
@@ -113,6 +128,10 @@ void FreeWorld(struct World *world)
         free(world->enemies[i]);
     }
     free(world->enemies);
+
+    free(world->buffers->object_buffer);
+    //free(world->buffers->graphic_buffer);
+    free(world->buffers);
 
     free(world);
 }

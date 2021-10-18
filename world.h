@@ -8,7 +8,7 @@
 #define HEALTH_DECREASE_RATE 3
 #define ENEMY_MOVEMENT_COOLDOWN 2
 #define DRAG 1
-#define MAX_SPEED 2
+#define MAX_SPEED 1
 
 enum Collision
 {
