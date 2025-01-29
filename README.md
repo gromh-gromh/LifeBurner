@@ -14,5 +14,5 @@
 wasd в английской раскладке
 
 ## Как запустить?
-Для запуска достаточно скачать и исполнить файл [LifeBurner.exe](https://github.com/gromh-gromh/LifeBurner/raw/main/LifeBurner.exe)
+Для запуска достаточно скачать и запустить файл [LifeBurner.exe](https://github.com/gromh-gromh/LifeBurner/raw/main/LifeBurner.exe)
 Так же вы можете просмотреть исходный код и скомппилировть его самостоятельно.
